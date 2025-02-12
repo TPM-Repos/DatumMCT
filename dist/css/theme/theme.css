@@ -134,6 +134,7 @@ hr {
 
 .pill {
 	background-color: transparent;
+	font-weight: bolder;
 	border: solid 2px var(--button-color, black);
 	color: var(--color-primary);
 }
