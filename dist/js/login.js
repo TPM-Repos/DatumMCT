@@ -253,8 +253,8 @@ function loginSuccess(result, username) {
 		return
 	}
 	
-	if (config.login.redirectGuestUrl && config.guestLogin.enabled && config.guestLogin.alias) {
-		LOGIN_REDIRECT_URL = (GROUP_ALIAS === config.guestLogin.alias)? config.login.redirectGuestUrl : config.login.redirectUrl
+	if (config.login.redirectGuestUrl && GROUP_ALIAS === config.guestAlias) {
+		LOGIN_REDIRECT_URL = config.login.redirectGuestUrl
 	}
 
 	// Redirect to default location
@@ -356,8 +356,8 @@ async function checkExistingLogin() {
 		return
 	}
 
-	if (config.login.redirectGuestUrl && config.guestLogin.enabled && config.guestLogin.alias) {
-		LOGIN_REDIRECT_URL = (storedGroupAlias === config.guestLogin.alias)? config.login.redirectGuestUrl : config.login.redirectUrl
+	if (config.login.redirectGuestUrl && storedGroupAlias === config.guestAlias) {
+		LOGIN_REDIRECT_URL = config.login.redirectGuestUrl
 	}
 
 	try {
