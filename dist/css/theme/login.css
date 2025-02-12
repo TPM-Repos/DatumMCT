@@ -228,20 +228,20 @@ button:disabled:hover {
 	gap: 1rem;
 	margin: 1.25rem 0;
 	font-size: 0.875rem;
-	color: rgba(0, 0, 0, 0.5);
+	color: white;
 }
 
 .login-divider:before,
 .login-divider:after {
 	content: "";
 	flex: 1;
-	border: 1px solid rgba(0, 0, 0, 0.05);
+	border: 1px solid white;
 }
 
 .login-copyright {
 	margin-top: auto;
 	font-size: 0.9em;
-	color: #888;
+	color: black;
 }
 
 /* Screen: Medium screens */
@@ -280,6 +280,8 @@ button:disabled:hover {
 }
 
 #forgot-link {
+	color: #08c;
+	font-size: 13pt;
 	/* top: -0.5em; */
 	/* position: relative; */
 }
