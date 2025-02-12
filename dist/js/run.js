@@ -173,6 +173,10 @@ async function createDriveAppSpecification() {
 			renderError(createError)
 		}
 
+		//Run Set Mode macro
+		if (QUERY_DRIVE_APP_ALIAS === 'CPQ Embedded') {
+			await client.runMacro(GROUP_ALIAS, driveAppSpecification.id, { macroName: 'SetMode', macroArgument: 'Filter' })
+		}
 		// Render
 		renderNewSpecification(driveAppSpecification, false)
 	} catch (error) {
