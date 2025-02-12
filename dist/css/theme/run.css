@@ -321,3 +321,9 @@ header svg {
 	background-color: var(--hover-background);
 }
 
+.dropdown-menu a svg {
+	width: 20px;
+	height: 20px;
+	min-width: 20px;
+}
+

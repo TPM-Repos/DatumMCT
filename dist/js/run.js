@@ -70,6 +70,7 @@ function startPageFunctions() {
 	}
 
 	setCustomClientErrorHandler()
+	showHeaderUsername()
 
 	// Show confirmation dialog before logout
 	if (config.run.showWarningOnExit) {
