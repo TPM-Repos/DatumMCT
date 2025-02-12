@@ -1043,7 +1043,7 @@ document.addEventListener("click", (e) => {
 // to hide it we need to set root --header-height to 0
 // we can hide or show it by setting showHeader to true or false
 // we know if this is a project if we have a project name
-if((projectType === "project" && !config.project.showHeader) || (projectType === "driveApp" && !config.driveApp.showHeader)) {
+if ((projectType === "project" && !config.project.showHeader) || (projectType === "driveApp" && !config.driveApp.showHeader) || (URL_QUERY.get("driveApp") === "CPQ Embedded")) {
 	document.querySelector("header").classList.add("hidden");
 }
 
