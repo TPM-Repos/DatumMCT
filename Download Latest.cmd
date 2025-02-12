@@ -11,7 +11,7 @@ echo Press any key to continue...
 pause > nul
 
 echo Cloning repository...
-git clone "https://github.com/TPM-Repos/ModifiedCorporateTheme"
+git clone "https://github.com/TPM-Repos/DatumMCT"
 
 echo Copying files...
 xcopy /Y /E ".\ModifiedCorporateTheme\*" .
@@ -22,3 +22,4 @@ rmdir /S /Q "ModifiedCorporateTheme"
 echo Done!
 echo Press any key to close this window...
 pause > nul
+
