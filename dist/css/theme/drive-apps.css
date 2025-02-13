@@ -3,159 +3,282 @@
 * DRIVEAPPS
 */
 
-.drive-app-inner {
-	padding: 0.5em 0.5em 3em;
-	margin: 0 auto;
-	max-width: var(--row-width);
-	min-height: 101vh; /* Stop scrollbar pop on load */
+:root {
+	--datum-blue: #00B2E2;
+	--datum-dark: #333333;
+	--datum-text: #666666;
+	--datum-bg: #f9f9f9;
 }
 
-.section-title h1 {
-	margin: 0.5em 0.25em 1em;
+/* Header Styles */
+.monolit-header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 20;
+	height: 80px;
+	background: url('https://a1a.180.myftpupload.com/wp-content/uploads/2018/03/footer-bg.jpg');
+	background-position: bottom;
+	box-shadow: 0px 2px 12px rgba(0,0,0,0.3);
 }
 
-.drive-app-list {
+.header-inner {
+	float: left;
+	padding-left: 80px;
+	width: 100%;
+}
+
+.logo-holder {
+	float: left;
+	position: relative;
+	width: 90px;
+	z-index: 21;
+	top: 20px;
+	max-width: 200px;
+}
+
+.logo-holder img {
+	width: 100%;
+	height: auto;
+}
+
+.nav-holder {
+	float: right;
+	position: relative;
+	top: 22px;
+	margin-right: 30px;
+}
+
+/* Profile Button Styles */
+#profileButton {
+	float: left;
+	padding: 10px 15px;
+	line-height: 1;
+	font-size: 15px;
+	color: #fff;
+	font-family: 'Oswald', sans-serif;
+	font-weight: normal;
+	position: relative;
+	z-index: 2;
 	display: flex;
-	flex-wrap: wrap;
-	transition: opacity 0.3s ease;
+	align-items: center;
+	text-decoration: none;
 }
 
-.empty-drive-apps {
-	padding: 0 0.5em;
+#profileButton:hover {
+	color: #1dafe7;
 }
-.empty-drive-apps p {
-	font-size: 1.5em;
+
+#profileButton svg {
+	width: 24px;
+	height: 24px;
+	margin-right: 8px;
+	fill: currentColor;
+}
+
+#active-username {
+	color: #fff;
+	font-size: 15px;
+}
+
+/* Reuse the working dropdown styles */
+nav li ul {
+	margin: 30px 0 0 0;
+	opacity: 0;
+	visibility: hidden;
+	position: absolute;
+	min-width: 190px;
+	padding-top: 58px;
+	padding-bottom: 20px;
+	right: 0;
+	z-index: 0;
+	background: rgba(0,0,0,0.91);
+	padding-left: 0px;
+	transition: all .2s ease-in-out;
+	list-style: none;
+}
+
+nav li ul:before {
+	content: '';
+	position: absolute;
+	bottom: 12px;
+	left: 10px;
+	right: 10px;
+	background: rgba(255,255,255,0.21);
+	height: 1px;
+}
+
+nav li:hover > ul {
+	opacity: 1;
+	visibility: visible;
 	margin: 0;
 }
 
-.drive-app-item {
+nav li ul li {
+	float: none;
+	display: block;
+	border: 0;
+}
+
+nav li ul a {
 	width: 100%;
-	padding: 0 0.75em 1.5em;
+	text-align: left;
+	padding: 9px 12px;
+	font-weight: 300;
+	font-size: 14px;
+	color: #fff;
+	font-family: 'Oswald', sans-serif;
+	display: flex;
+	align-items: center;
+}
+
+nav li ul a:hover {
+	color: #1dafe7;
+}
+
+nav li ul a svg {
+	width: 20px;
+	height: 20px;
+	margin-right: 8px;
+	fill: currentColor;
+}
+
+body {
+	background-color: var(--datum-bg);
+	font-family: 'Montserrat', sans-serif;
+}
+
+.content-wrap {
+	padding-top: 96px;
+}
+
+.drive-app-inner {
+	padding: 2em;
+	margin: 0 auto;
+	max-width: 1224px;
+	min-height: calc(100vh - 96px);
+}
+
+.section-title {
+	position: relative;
+	margin-bottom: 40px;
+}
+
+.section-title h1 {
+	font-size: 34px;
+	font-weight: 800;
+	text-transform: uppercase;
+	color: var(--datum-dark);
+	position: relative;
+	letter-spacing: 2px;
+	margin: 0;
+}
+
+.section-title h1:before {
+	content: '';
+	position: absolute;
+	left: 0;
+	bottom: -20px;
+	height: 2px;
+	width: 50px;
+	background: var(--datum-blue);
+}
+
+.drive-app-list {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+	gap: 30px;
+	transition: opacity 0.3s ease;
+}
+
+.drive-app-item {
 	text-decoration: none;
 	opacity: 0;
 	animation: fade-up 0.5s ease forwards;
 	animation-delay: calc(var(--index) * 20ms);
 }
-.drive-app-item:focus {
-	outline: none;
-}
-.drive-app-item:focus .inner {
-	box-shadow: 0 0 0 2px var(--color-focus);
-}
 
 .drive-app-item .inner {
 	position: relative;
 	display: flex;
-	flex-wrap: wrap;
+	flex-direction: column;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: center;
+	text-align: center;
 	height: 100%;
 	background-color: #fff;
-	padding: 1.5em;
-	border: 2px solid transparent;
-	border-radius: var(--inputRadius);
-	box-shadow: var(--shadow-light);
-	transition: border 0.3s ease;
-}
-.drive-app-item .inner:hover {
-	border: 2px solid var(--color-focus);
+	padding: 40px;
+	border: none;
+	border-radius: 0;
+	box-shadow: 0 9px 26px rgba(58, 87, 135, 0.1);
+	transition: all 0.3s ease;
 }
 
-.drive-app-item .icon {
-	position: absolute;
-	top: 0;
-	right: 0;
-	margin: 1.5rem;
-	font-size: 1.5em;
-	color: rgba(0, 0, 0, 0.15);
+.drive-app-item .inner:hover {
+	transform: translateY(-10px);
+}
+
+.drive-app-item .app-icon {
+	width: 120px;
+	height: 120px;
+	margin-bottom: 30px;
+	color: var(--datum-blue);
+}
+
+.drive-app-item .app-icon img,
+.drive-app-item .app-icon svg {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
 }
 
 .drive-app-item .details {
 	width: 100%;
-	margin-bottom: 1em;
-	overflow: hidden;
-}
-
-.drive-app-item .drive-app-alias,
-.drive-app-item .drive-app-name {
-	overflow: hidden;
-	text-overflow: ellipsis;
+	margin-bottom: 30px;
 }
 
 .drive-app-item .drive-app-alias {
-	font-size: 1.25em;
-	padding-right: 2em;
-	margin: 0 0 0.15em;
+	font-size: 24px;
+	font-weight: 800;
+	color: var(--datum-dark);
+	margin: 0 0 15px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
 }
+
 .drive-app-item .drive-app-name {
-	font-size: 1em;
-	font-weight: 400;
-	color: var(--color-primary);
-	opacity: 0.6;
+	font-size: 16px;
+	color: var(--datum-text);
+	line-height: 1.6;
 }
 
 .drive-app-item .drive-app-action {
 	display: inline-flex;
 	justify-content: center;
-	padding: 0.75em 2em;
-	margin: 0;
-	border-radius: var(--button-radius, 100em);
-	border: none;
-	background-color: var(--color-neutral);
+	align-items: center;
+	padding: 15px 40px;
+	background-color: var(--datum-blue);
 	color: #fff;
-	cursor: pointer;
-	font-size: 1em;
-	font-weight: 600;
-	transition: background-color 0.3s ease, filter 0.3s ease;
+	font-size: 14px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	border: none;
+	transition: all 0.3s ease;
 }
+
 .drive-app-item .drive-app-action:hover {
-	filter: brightness(110%);
-}
-
-/* Screen: Tablet-up */
-@media screen and (min-width: 40em) {
-	.drive-app-inner {
-		padding: 1.5em 1.5em 5em;
-	}
-
-	.drive-app-item .inner {
-		flex-wrap: nowrap;
-		padding: 1.5em;
-	}
-
-	.drive-app-item .icon {
-		position: static;
-		margin: 0 1rem 0 0;
-		font-size: 2.5em;
-	}
-
-	.drive-app-item .details {
-		margin: 0 1.5em 0 0;
-	}
-}
-
-/* Screen: Laptop-up */
-@media screen and (min-width: 60em) {
-	.section-title h1 {
-		margin: 0.75em 0.25em 1.25em;
-	}
-
-	.drive-app-inner {
-		padding: 1.5em 2em 5em;
-	}
-}
-
-/* Screen: Desktop-up */
-@media screen and (min-width: 100em) {
-	.drive-app-item {
-		width: 50%;
-	}
+	background-color: var(--datum-dark);
+	transform: none;
 }
 
 /* Loading skeleton */
 .skeleton-block {
-	height: 6em;
-	margin-bottom: 0.5em;
+	height: 300px;
+	margin-bottom: 0;
+	border-radius: 0;
+	background-color: #f0f0f0;
 }
 
 .drive-app-item.skeleton-item {
@@ -171,4 +294,38 @@
 }
 .drive-app-list .skeleton-item:nth-child(4) {
 	opacity: 0.25;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+	.content-wrap {
+		padding-top: 80px;
+	}
+
+	.drive-app-inner {
+		padding: 20px;
+	}
+	
+	.drive-app-list {
+		grid-template-columns: 1fr;
+		gap: 20px;
+	}
+	
+	.section-title h1 {
+		font-size: 24px;
+	}
+
+	.drive-app-item .inner {
+		padding: 30px;
+	}
+
+	.drive-app-item .app-icon {
+		width: 80px;
+		height: 80px;
+		margin-bottom: 20px;
+	}
+
+	.drive-app-item .drive-app-alias {
+		font-size: 20px;
+	}
 }

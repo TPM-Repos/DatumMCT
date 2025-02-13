@@ -5,11 +5,34 @@
 
 const CREDENTIALS = config.credentials
 const driveAppList = document.getElementById("drive-app-list")
+const profileButton = document.getElementById("profileButton")
+const dropdownMenu = document.getElementById("dropdownMenu")
+
+// Handle profile dropdown
+if (profileButton && dropdownMenu) {
+	profileButton.addEventListener('click', function(e) {
+		e.preventDefault();
+		dropdownMenu.classList.toggle('show');
+	});
+
+	// Close dropdown when clicking outside
+	document.addEventListener('click', function(e) {
+		if (!profileButton.contains(e.target) && !dropdownMenu.contains(e.target)) {
+			dropdownMenu.classList.remove('show');
+		}
+	});
+}
 
 /**
  * Start page functions.
  */
 async function startPageFunctions() {
+	// Check if user is guest and redirect if needed
+	if (GROUP_ALIAS === config.guestAlias) {
+		window.location.href = "index.html";
+		return;
+	}
+
 	// After short delay, show loading state (skip loading state entirely if very quick loading)
 	const loadingTimeout = setTimeout(() => {
 		driveAppList.style.opacity = ""
@@ -55,12 +78,34 @@ function renderDriveApps(driveApps) {
 	// Loop out DriveApps
 	for (let index = 0; index < driveApps.length; index++) {
 		const driveApp = driveApps[index]
+		let title, description, icon;
+
+		// Customize display based on app
+		if (driveApp.alias === "CPQ") {
+			title = "Quotes & Orders"
+			description = "View and manage quotes and orders"
+			icon = "quotes.png"
+		} else if (driveApp.alias === "CPQ Embedded") {
+			title = "Create New Quote"
+			description = "Create a new quote"
+			icon = "new-quote.png"
+		} else {
+			title = driveApp.alias
+			description = driveApp.name
+			icon = "dist/icons.svg#drive-app-item"
+		}
+
 		const markup = `
             <div class="inner">
-                <svg class="icon"><use xlink:href="dist/icons.svg#drive-app-item" /></svg>
+                <div class="app-icon">
+                    ${icon.endsWith('.png') 
+                        ? `<img src="dist/img/${icon}" alt="${title}" />` 
+                        : `<svg class="icon"><use xlink:href="${icon}" /></svg>`
+                    }
+                </div>
                 <div class="details">
-                    <h4 class="drive-app-alias" title="${driveApp.alias}">${driveApp.alias}</h4>
-                    <div class="drive-app-name" title="${driveApp.name}">${driveApp.name}</div>
+                    <h4 class="drive-app-alias" title="${title}">${title}</h4>
+                    <div class="drive-app-name" title="${description}">${description}</div>
                 </div>
                 <div class="drive-app-action">Start</div>
             </div>
@@ -72,7 +117,7 @@ function renderDriveApps(driveApps) {
 		item.style.setProperty("--index", index)
 		item.setAttribute("data-id", driveApp.id)
 		item.href = `run.html?driveApp=${driveApp.alias}`
-		item.title = `Start DriveApp: ${driveApp.alias}`
+		item.title = `Start DriveApp: ${title}`
 		item.innerHTML = markup
 
 		driveAppList.appendChild(item)

@@ -5,6 +5,11 @@
 
 const SERVER_URL = config.serverUrl
 const GROUP_ALIAS = localStorage.getItem("sessionAlias")
+
+// Guest users should not be able to access this page
+const CURRENT_PAGE = window.location.pathname.split('/').pop().replace('.html', '');
+const pagesForbiddenFromGusets = ["projects", "drive-apps", "details", "history"]
+
 const CURRENT_SESSION = localStorage.getItem("sessionId")
 
 // Account Management
@@ -24,6 +29,9 @@ let client
 	 * Run on page load.
 	 */
 ;(() => {
+	if (GROUP_ALIAS == config.guestAlias && pagesForbiddenFromGusets.includes(CURRENT_PAGE)) {
+		redirectToLogin("Guests don't have access to that page", "error", true)
+	}
 	// Check if Session Id exists
 	checkStoredSessionId()
 	showUsername()
@@ -253,19 +261,17 @@ function showUsername() {
 	}
 
 	usernameOutput.classList.add("is-shown")
-	document.querySelector("#active-username .username").innerHTML = username
+	usernameOutput.textContent = username
 
 	adjustFontSize()
 }
 
 function adjustFontSize() {
-    const element = document.querySelector('.username');
+    const element = document.getElementById('active-username');
     let fontSize = 20;
     element.style.fontSize = fontSize + 'px';
 
     while (element.scrollWidth > element.clientWidth && fontSize > 10) {
-		consoleDebug(fontSize);
-		
         fontSize -= 1;
         element.style.fontSize = fontSize + 'px';
     }

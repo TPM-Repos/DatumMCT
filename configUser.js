@@ -19,7 +19,7 @@ version: "1.3.1",
 	// (Optional) Enter custom redirect URLs for login/logout and Project/DriveApp close/cancel
 	folder: "",
 	login: {
-		redirectUrl: "run.html?driveApp=CPQ",
+		redirectUrl: "home.html",
 		// set this if you want to redirect guest users to a different page
 		redirectGuestUrl: "run.html?driveApp=CPQ%20Embedded",
 		// Set this to left, center, or right to position the login form on the page
@@ -35,14 +35,14 @@ version: "1.3.1",
 	},
 	project: {
 		// you may put "logout" instead of a page location
-		redirectOnClose: "details.html",
-		redirectOnCancel: "projects.html",
+		redirectOnClose: "home.html",
+		redirectOnCancel: "home.html",
 		showHeader: false,
 	},
 	driveApp: {
 		// you may put "logout" instead of a page location
-		redirectOnClose: "logout",
-		redirectOnCancel: "logout",
+		redirectOnClose: "home.html",
+		redirectOnCancel: "home.html",
 		showHeader: true,
 	},
 	// (Optional) Configure 'Run' view
@@ -129,7 +129,7 @@ version: "1.3.1",
 		{
 			title: "DriveApps",
 			icon: "drive-apps",
-			href: "drive-apps.html",
+			href: "home.html",
 		},
 		{
 			title: "History",
