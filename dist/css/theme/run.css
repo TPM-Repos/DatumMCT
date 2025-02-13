@@ -237,10 +237,11 @@ header {
 	top: 0;
 	left: 0;
 	right: 0;
+	padding: 0 16px;
 	height: var(--header-height);
 	background: white;
 	display: flex;
-	justify-content: flex-end;
+	justify-content: space-between;
 	align-items: center;
 	box-shadow: 0 2px 4px var(--shadow-color);
 	z-index: 100;
@@ -250,7 +251,7 @@ header {
 	display: flex;
 	align-items: center;
 	gap: 8px;
-	padding: 2px 16px;
+	padding: 2px 0px;
 	border: none;
 	background: none;
 	border-radius: 6px;
@@ -325,5 +326,14 @@ header svg {
 	width: 20px;
 	height: 20px;
 	min-width: 20px;
+}
+
+.home {
+	color: #b5b5b5;
+	height: 30px;
+}
+
+.home:hover {
+	color: #000;
 }
 
