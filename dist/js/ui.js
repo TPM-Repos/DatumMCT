@@ -105,3 +105,15 @@ function setStyles(styles, parentKey = "") {
 	}
 	return true
 }
+
+// Mobile Navigation Toggle
+document.addEventListener('DOMContentLoaded', function() {
+	const navButton = document.querySelector('.nav-button');
+	const navHolder = document.querySelector('.nav-holder');
+	
+	if (navButton && navHolder) {
+		navButton.addEventListener('click', function() {
+			navHolder.classList.toggle('show');
+		});
+	}
+});
